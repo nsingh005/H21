@@ -14,40 +14,7 @@ import cs445.project.structs.SearchResult;
 import cs445.project.structs.SearchStruct;
 
 public class SearchFacilitator {
-
-	DBSaveRestore dbSaveRestore;
 	
-	
-	public SearchFacilitator() {
-		dbSaveRestore = new DBSaveRestore();
-	}
-	
-	public void deleteSearchData(){		
-		dbSaveRestore.deleteSearchData();
-	}
-	
-	public List<Hostel> getAvailableBedsInHostels(Date startDate,Date endDate){
-		
-		if(startDate.after(endDate)){
-			return null;
-		}
-		
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new java.util.Date());
-		
-		if(startDate.before(cal.getTime())){
-			return null;
-		}
-		
-		List<Hostel> hostels = dbSaveRestore.getAvailableBedsInAllHostels(startDate,endDate);
-		
-		return hostels;
-	}
-	
-	public void addSearchDate(List<SearchResult> searchResultSet){
-		//Save Searched Data
-		dbSaveRestore.addSearchData(searchResultSet);
-	}
 	
 	public List<SearchResult> search(SearchStruct searchStruct,List<Hostel> hostels) {
 		if(searchStruct == null || hostels == null)
@@ -218,14 +185,6 @@ public class SearchFacilitator {
 		}
 		
 		return searchGenericList;
-	}
-	
-	public List<Hostel> viewAll() {
-		List<Hostel> hostels = null;
-		
-		DBSaveRestore dbSaveRestore = new DBSaveRestore();
-		hostels = dbSaveRestore.getHostelList();
-		return hostels;
 	}
 	
 	//Number of search Options depends on the number of beds available at start date

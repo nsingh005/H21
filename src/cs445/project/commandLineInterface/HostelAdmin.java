@@ -9,6 +9,7 @@ import java.util.List;
 import cs445.project.base.Booking;
 import cs445.project.base.Hostel;
 import cs445.project.facilitator.Admin;
+import cs445.project.facilitator.DBSaveRestore;
 import cs445.project.structs.Occupancy;
 import cs445.project.structs.Revenue;
 
@@ -33,9 +34,10 @@ public class HostelAdmin {
 					
 				    List<Hostel> hostels = null;
 				    Admin admin = new Admin();
+				    DBSaveRestore dbSaveRestore = new DBSaveRestore();
 				    hostels = admin.loadXML(new File(xmlFile));
 				    if(hostels.size() != 0) {
-					    admin.saveHostelList(hostels);
+				    	dbSaveRestore.loadUpdateHostelList(hostels);
 					    System.out.println("Data loaded successfully!!");
 					    return;
 				    }
@@ -58,6 +60,7 @@ public class HostelAdmin {
 		}
 		else if (command.compareTo("admin") == 0 && subCommand.compareTo("revenue") ==0) {
 			Admin admin = new Admin();
+			DBSaveRestore dbSaveRestore = new DBSaveRestore();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			if(args.length >= 7) {
 				if(args[2].compareTo("all")==0 &&
@@ -73,10 +76,10 @@ public class HostelAdmin {
 						e.printStackTrace();
 					}
 					
-					List<Hostel> hostels = admin.getHostelList();
+					List<Hostel> hostels = dbSaveRestore.getHostelList();
 					if(hostels.size() !=0){
 						for(Hostel hostel : hostels){
-							List<Booking> bookings = admin.getHostelBookings(hostel.getHostelId(),startDate,endDate);
+							List<Booking> bookings = dbSaveRestore.getHostelBookings(hostel.getHostelId(),startDate,endDate);
 							if(bookings.size() != 0){
 								Revenue revenue = new Revenue(hostel, startDate, endDate, admin.calculateRevenue(bookings));
 							
@@ -110,9 +113,9 @@ public class HostelAdmin {
 								e.printStackTrace();
 							}			
 							
-							Hostel hostel = admin.getHostelById(hostelId);
+							Hostel hostel = dbSaveRestore.getHostelById(hostelId);
 							if(hostel != null){
-								List<Booking> bookings = admin.getHostelBookings(hostelId,startDate,endDate);
+								List<Booking> bookings = dbSaveRestore.getHostelBookings(hostelId,startDate,endDate);
 								if(bookings.size() !=0){
 									Revenue revenue = new Revenue(hostel, startDate, endDate, admin.calculateRevenue(bookings));
 									
@@ -160,9 +163,10 @@ public class HostelAdmin {
 		}
 		else if (command.compareTo("admin") == 0 && subCommand.compareTo("occupancy") ==0) {
 			Admin admin = new Admin();
+			DBSaveRestore dbSaveRestore = new DBSaveRestore();
 			if(args.length >= 3) {
 				if(args[2].compareTo("all")==0) {
-					List<Hostel> hostels = admin.getHostelList();
+					List<Hostel> hostels = dbSaveRestore.getHostelList();
 					if(hostels.size() != 0) {
 						//Get the occupancy for all the hostels
 						List<Occupancy> occupancy = admin.getOccupancyForAllHostels(hostels);
@@ -186,7 +190,7 @@ public class HostelAdmin {
 					//Get the occupancy of a particular hostel
 					if(args.length == 4) {
 						Integer hostelId = Integer.parseInt(args[3]);
-						Hostel hostel = admin.getHostelById(hostelId);
+						Hostel hostel = dbSaveRestore.getHostelById(hostelId);
 						if(hostel != null) {
 							Occupancy occupancy = admin.getOccupancyByHostel(hostel);
 							if(occupancy != null){
@@ -224,11 +228,11 @@ public class HostelAdmin {
 			}			
 		}
 		else if (command.compareTo("admin") == 0 && subCommand.compareTo("view") ==0){
-			Admin admin = new Admin();
+			DBSaveRestore dbSaveRestore = new DBSaveRestore();
 			if(args.length >= 3) {
 				if(args[2].compareTo("all")==0) {
 					//Get the list of all the hostels
-					List<Hostel> hostels = admin.getHostelList();
+					List<Hostel> hostels = dbSaveRestore.getHostelList();
 					if(hostels.size() != 0) {
 						for(Hostel h : hostels) {
 							System.out.println("Hostel: "+ h);
@@ -244,7 +248,7 @@ public class HostelAdmin {
 					//Get the details of a particular hostel
 					if(args.length == 4) {
 						Integer hostelId = Integer.parseInt(args[3]);
-						Hostel hostel = admin.getHostelById(hostelId);
+						Hostel hostel = dbSaveRestore.getHostelById(hostelId);
 						if(hostel != null) {
 							System.out.println("Hostel: "+ hostel);
 							System.out.println(hostel.getBeds());

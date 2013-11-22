@@ -7,6 +7,7 @@ import java.util.List;
 
 import cs445.project.base.Bed;
 import cs445.project.base.Hostel;
+import cs445.project.facilitator.DBSaveRestore;
 import cs445.project.facilitator.SearchFacilitator;
 import cs445.project.structs.AvailableBedInfo;
 import cs445.project.structs.SearchGeneric;
@@ -19,9 +20,10 @@ public class SearchBeds {
 		String command = args[0];
 		SearchStruct searchStruct = new SearchStruct();
 		SearchFacilitator searchFacilitator = new SearchFacilitator();
+		DBSaveRestore dbSaveRestore = new DBSaveRestore();
 		
 		if(args.length == 1){
-			List<Hostel> hostels = searchFacilitator.viewAll();
+			List<Hostel> hostels = dbSaveRestore.getHostelList();
 			printHostelDetails(hostels);
 			return;			
 		}
@@ -42,7 +44,7 @@ public class SearchBeds {
 						e.printStackTrace();
 					}
 					
-					List<Hostel> hostels = searchFacilitator.getAvailableBedsInHostels(searchStruct.getStartDate(),searchStruct.getEndDate());
+					List<Hostel> hostels = dbSaveRestore.getAvailableBedsInAllHostels(searchStruct.getStartDate(),searchStruct.getEndDate());
 					
 					if(hostels != null){
 						if(hostels.size() != 0){
@@ -82,13 +84,20 @@ public class SearchBeds {
 					searchStruct.setNumberOfBeds(Integer.parseInt(args[8]));
 					
 					List<Hostel> hostels = 
-							searchFacilitator.getAvailableBedsInHostels(searchStruct.getStartDate(),searchStruct.getEndDate());
+							dbSaveRestore.getAvailableBedsInAllHostels(searchStruct.getStartDate(),searchStruct.getEndDate());
 					if(hostels != null){
 						if(hostels.size() != 0){
-							searchFacilitator.deleteSearchData();
+							
 							List<SearchResult> searchResultSet  = searchFacilitator.search(searchStruct,hostels);
-							searchFacilitator.addSearchDate(searchResultSet);
-							printResultSet(searchResultSet);
+							if(searchResultSet != null){
+								dbSaveRestore.deleteSearchData();
+								dbSaveRestore.addSearchData(searchResultSet);
+								printResultSet(searchResultSet);
+							}
+							else{
+								System.out.println("No search results found!!");
+							}
+								
 						}
 						else {
 							System.out.println("No hostel Data present!!");

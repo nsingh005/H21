@@ -24,25 +24,6 @@ public class Bed {
 		this.state = state;
 	}
 
-	public Bed(Date date, Integer roomNumber, Integer bedNumber, Integer price) {
-		super();
-		this.date = date;
-		this.roomNumber = roomNumber;
-		this.bedNumber = bedNumber;
-		this.price = price;
-		this.state = BedState.AVAILABLE;
-	}
-	
-	public Bed(Date date, Integer roomNumber, Integer bedNumber, Integer price,
-			BedState state) {
-		super();
-		this.date = date;
-		this.roomNumber = roomNumber;
-		this.bedNumber = bedNumber;
-		this.price = price;
-		this.state = state;
-	}
-
 	public Bed() {
 		// TODO Auto-generated constructor stub
 	}

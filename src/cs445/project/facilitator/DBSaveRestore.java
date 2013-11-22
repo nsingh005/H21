@@ -1,6 +1,7 @@
 package cs445.project.facilitator;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -95,7 +96,16 @@ public class DBSaveRestore {
 	}
 	public List<Hostel> getAvailableBedsInAllHostels (Date startDate, Date endDate) {
 		List<Hostel> hostels = null;
+		if(startDate.after(endDate)){
+			return null;
+		}
 		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new java.util.Date());
+		
+		if(startDate.before(cal.getTime())){
+			return null;
+		}
 		try {
 			hostels = hostelDAOImpl.getAvailableBedsInAllHostels(startDate, endDate);
 		} catch (ServiceLocatorException | SQLException e) {

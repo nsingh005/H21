@@ -101,7 +101,7 @@ public class Admin {
 								Integer bedNumber = Integer.parseInt(eElement1.getElementsByTagName("bed").item(0).getTextContent());
 								Integer price = Integer.parseInt(eElement1.getElementsByTagName("price").item(0).getTextContent());							
 								
-								beds.add(new Bed(date,roomNumber,bedNumber,price));
+								beds.add(new Bed(null,date,roomNumber,bedNumber,price,null));
 					 
 							}
 						}
@@ -154,34 +154,5 @@ public class Admin {
 		}
 		
 		return revenue;
-	}
-	
-	public List<Booking> getHostelBookings(Integer hostelId,Date startDate,Date endDate){
-		DBSaveRestore dbSaveRestore = new DBSaveRestore();
-		List<Booking> bookings = dbSaveRestore.getHostelBookings(hostelId,startDate,endDate);
-		
-		return bookings;
-	}
-	
-	public List<Hostel> getHostelList() {
-		List<Hostel> hostels = null;
-		DBSaveRestore dbSaveRestore = new DBSaveRestore();
-		hostels = dbSaveRestore.getHostelList();
-		
-		return hostels;
-	}	
-	
-	public Hostel getHostelById(Integer hostelId) {
-		Hostel hostel = null;
-		
-		DBSaveRestore dbSaveRestore = new DBSaveRestore();
-		hostel = dbSaveRestore.getHostelById(hostelId);
-		
-		return hostel;
-	}
-	
-	public void saveHostelList(List<Hostel> hostels){
-	    DBSaveRestore dbSaveRestore = new DBSaveRestore();
-	    dbSaveRestore.loadUpdateHostelList(hostels);
 	}
 }
