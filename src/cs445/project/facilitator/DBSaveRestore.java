@@ -334,6 +334,19 @@ public class DBSaveRestore {
 		return beds;
 	}
 	
+	public List<Booking> getAllBookings(){
+		List<Booking> bookings=null;
+		
+		try {
+			bookings =  bookingDAO.getAllBookings();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return bookings;
+	}
+	
 	public List<Booking> getHostelBookings(Integer hostelId,Date startDate,Date endDate) {
 		List<Booking> bookings=null;
 		

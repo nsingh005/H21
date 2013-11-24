@@ -1,12 +1,15 @@
 package cs445.project.commandLineInterface;
 
+import java.util.List;
+
+import cs445.project.base.Bed;
 import cs445.project.base.Booking;
 import cs445.project.facilitator.BookFacilitator;
 import cs445.project.facilitator.DBSaveRestore;
 
 public class BookingApp {
 	public static void bookApp(String args[]) {
-		if(args.length < 4) {
+		if(args.length < 2) {
 			System.out.println("Insufficient number of arguments");
 			printHelp();
 			return;
@@ -48,7 +51,23 @@ public class BookingApp {
 		} 
 		else if(command.compareTo("book") == 0 &&
 				subCommand.compareTo("view")==0) {
-			if(args.length == 4) {
+			if(args.length ==2){
+				BookFacilitator bookFacilitator = new BookFacilitator();
+				
+				List<Booking> bookingList = bookFacilitator.getAllBookings();
+				if(bookingList != null) {
+					for(Booking b : bookingList){
+						printBooking(b);
+						System.out.println("User details: " + new DBSaveRestore().getUserById(b.getUserId()));
+						System.out.println("");
+					}
+				}
+				else{
+					System.out.println("No bookings available!!");
+				}
+					
+			}
+			else if(args.length == 4) {
 				if(args[2].compareTo("--booking_id") ==0 ) {
 					BookFacilitator bookFacilitator = new BookFacilitator();
 					
@@ -57,7 +76,7 @@ public class BookingApp {
 					Booking booking = bookFacilitator.getBookingDetailsById(bookingId);
 					if(booking != null) {
 						System.out.println("Below are the booking details:");
-						System.out.println(booking);
+						printBooking(booking);
 						System.out.println("User details: " + new DBSaveRestore().getUserById(booking.getUserId()));
 						return;
 					}
@@ -116,6 +135,13 @@ public class BookingApp {
 		}
 	}
 	
+	private static void printBooking(Booking b){
+		System.out.println("Booking Id:" + b.getBookingId() +" User Id: "+ b.getUserId() + " Hostel Id: "+ b.getHostelId());
+		System.out.println("Hostel Name: "+ b.getHostelName());
+		for(Bed bed: b.getBeds()){
+			System.out.println(bed);
+		}
+	}
 	public static void printHelp() {
 		System.out.println("Hostel Booking Usage:");
 		System.out.println("  book add --search_id <Search Id> --user_id <User Id> : Books the bed as per the "

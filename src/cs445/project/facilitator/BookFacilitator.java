@@ -2,6 +2,7 @@ package cs445.project.facilitator;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import cs445.project.base.BedState;
 import cs445.project.base.Booking;
@@ -57,6 +58,10 @@ public class BookFacilitator {
 	public Booking getBookingDetailsById(Integer bookingId) {
 		
 		return dbSaveRestore.getBookingById(bookingId);
+	}
+	
+	public List<Booking> getAllBookings(){
+		return dbSaveRestore.getAllBookings();
 	}
 	
 	public void cancelBooking(Booking booking) {
