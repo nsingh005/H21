@@ -10,7 +10,7 @@ public class Revenue {
 	Date startDate;
 	Date endDate;
 	Integer revenue;
-
+	
 	public Revenue(Hostel hostel, Date startDate, Date endDate, Integer revenue) {
 		super();
 		this.hostel = hostel;

@@ -26,8 +26,10 @@ public class SearchGenericTest {
 
 			boolean result = fixture.equals(obj);
 
-			// add additional test code here
 			assertEquals(true, result);
+			assertEquals(fixture.hashCode(),obj.hashCode());
+			assertEquals(true,fixture.equals(fixture));
+			assertEquals(new SearchGeneric().hashCode(),new SearchGeneric().hashCode());
 		}
 
 		@Test
@@ -41,7 +43,6 @@ public class SearchGenericTest {
 
 			boolean result = fixture.equals(obj);
 
-			// add additional test code here
 			assertEquals(false, result);
 		}
 
@@ -56,7 +57,6 @@ public class SearchGenericTest {
 
 			boolean result = fixture.equals(obj);
 
-			// add additional test code here
 			assertEquals(false, result);
 		}
 
@@ -72,7 +72,6 @@ public class SearchGenericTest {
 
 			boolean result = fixture.equals(obj);
 
-			// add additional test code here
 			assertEquals(false, result);
 		}
 
@@ -89,7 +88,6 @@ public class SearchGenericTest {
 
 			boolean result = fixture.equals(obj);
 
-			// add additional test code here
 			assertEquals(false, result);
 		}
 
@@ -108,7 +106,6 @@ public class SearchGenericTest {
 
 			boolean result = fixture.equals(obj);
 
-			// add additional test code here
 			assertEquals(false, result);
 		}
 
@@ -121,13 +118,14 @@ public class SearchGenericTest {
 			fixture.setAvailableBedInfo(new LinkedList<AvailableBedInfo>());
 			SearchGeneric obj = new SearchGeneric();
 			obj.setHostelId(new Integer(1));
-			obj.setHostelName("");
+			obj.setHostelName(null);
 			obj.setAvailableBedInfo(new LinkedList<AvailableBedInfo>());
 
 			boolean result = fixture.equals(obj);
 
-			// add additional test code here
-			assertEquals(false, result);
+			assertEquals(true, result);
+			obj.setHostelName("");
+			assertEquals(false, fixture.equals(obj));
 		}
 
 		@Test
@@ -140,14 +138,56 @@ public class SearchGenericTest {
 			SearchGeneric obj = new SearchGeneric();
 			obj.setHostelId(new Integer(1));
 			obj.setHostelName("");
+			
+			boolean result = fixture.equals(obj);
+
+			assertEquals(true, result);
+			
+			obj.setAvailableBedInfo(new LinkedList<AvailableBedInfo>());
+			assertEquals(false, fixture.equals(obj));
+
+		}
+
+		@Test
+		public void testEquals_9()
+			throws Exception {
+			SearchGeneric fixture = new SearchGeneric();
+			fixture.setHostelId(new Integer(1));
+			fixture.setHostelName("");
+			List<AvailableBedInfo> avlBedsInfo = new LinkedList<AvailableBedInfo>();
+			avlBedsInfo.add(new AvailableBedInfo());
+			fixture.setAvailableBedInfo(avlBedsInfo);
+			SearchGeneric obj =
+					new SearchGeneric();
+			obj.setHostelId(new Integer(1));
+			obj.setHostelName("");
 			obj.setAvailableBedInfo(new LinkedList<AvailableBedInfo>());
 
 			boolean result = fixture.equals(obj);
 
-			// add additional test code here
 			assertEquals(false, result);
 		}
+		
+		@Test
+		public void testEquals_10()
+			throws Exception {
+			SearchGeneric fixture = new SearchGeneric();
+			fixture.setHostelId(null);
+			fixture.setHostelName("");
+			fixture.setAvailableBedInfo(new LinkedList<AvailableBedInfo>());
+			SearchGeneric obj = new SearchGeneric();
+			obj.setHostelId(null);
+			obj.setHostelName("");
+			obj.setAvailableBedInfo(new LinkedList<AvailableBedInfo>());
+			boolean result = fixture.equals(obj);
 
+			assertEquals(true, result);
+			
+			obj.setHostelId(new Integer(1));
+			assertEquals(false, fixture.equals(obj));
+
+		}
+		
 		@Test
 		public void testGetAvailableBedInfo_1()
 			throws Exception {
@@ -158,7 +198,6 @@ public class SearchGenericTest {
 
 			List<AvailableBedInfo> result = fixture.getAvailableBedInfo();
 
-			// add additional test code here
 			assertNotNull(result);
 			assertEquals(0, result.size());
 		}
@@ -173,7 +212,6 @@ public class SearchGenericTest {
 
 			Integer result = fixture.getHostelId();
 
-			// add additional test code here
 			assertNotNull(result);
 			assertEquals("1", result.toString());
 			assertEquals((byte) 1, result.byteValue());
@@ -194,7 +232,6 @@ public class SearchGenericTest {
 
 			String result = fixture.getHostelName();
 
-			// add additional test code here
 			assertEquals("", result);
 		}
 
@@ -209,7 +246,6 @@ public class SearchGenericTest {
 
 			fixture.setAvailableBedInfo(availableBedInfo);
 
-			// add additional test code here
 		}
 
 		@Test
@@ -223,7 +259,6 @@ public class SearchGenericTest {
 
 			fixture.setHostelId(hostelId);
 
-			// add additional test code here
 		}
 
 		@Test
@@ -237,7 +272,6 @@ public class SearchGenericTest {
 
 			fixture.setHostelName(hostelName);
 
-			// add additional test code here
 		}
 
 		@Test
@@ -250,7 +284,6 @@ public class SearchGenericTest {
 
 			String result = fixture.toString();
 
-			// add additional test code here
 			assertEquals("SearchGeneric [hostelId=1, hostelName=, availableBedInfoList=[]]", result);
 		}
 }

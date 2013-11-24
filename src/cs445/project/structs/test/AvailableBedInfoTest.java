@@ -3,6 +3,7 @@ package cs445.project.structs.test;
 import static org.junit.Assert.*;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Test;
@@ -29,9 +30,10 @@ public class AvailableBedInfoTest {
 		obj.setBedsAvailable(new Integer(1));
 
 		boolean result = fixture.equals(obj);
-
-		// add additional test code here
+		
 		assertEquals(true, result);
+		assertEquals(true, fixture.equals(fixture));
+		assertEquals(fixture.hashCode(),obj.hashCode());
 	}
 
 	@Test
@@ -47,7 +49,7 @@ public class AvailableBedInfoTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
+
 		assertEquals(false, result);
 	}
 
@@ -64,7 +66,7 @@ public class AvailableBedInfoTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
+
 		assertEquals(false, result);
 	}
 
@@ -76,33 +78,54 @@ public class AvailableBedInfoTest {
 		fixture.setMaxPrice(new Integer(1));
 		fixture.setStartDate(new Date());
 		fixture.setMinPrice(new Integer(1));
-		fixture.setBedsAvailable(new Integer(1));
+		fixture.setBedsAvailable(null);
 		AvailableBedInfo obj = new AvailableBedInfo();
-		obj.setBedsAvailable(new Integer(1));
+		obj.setEndDate(null);
+		obj.setMaxPrice(null);
+		obj.setStartDate(null);
+		obj.setMinPrice(null);
+		obj.setBedsAvailable(null);
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
+		
+		obj.setBedsAvailable(new Integer(1));
+		assertEquals(false, fixture.equals(obj));
+		
+		AvailableBedInfo obj1 = new AvailableBedInfo();
+		obj1.setEndDate(null);
+		obj1.setMaxPrice(null);
+		obj1.setStartDate(null);
+		obj1.setMinPrice(null);
+		obj1.setBedsAvailable(new Integer(2));
+		assertEquals(false, obj1.equals(obj));
 	}
 
 	@Test
 	public void testEquals_5()
 		throws Exception {
 		AvailableBedInfo fixture = new AvailableBedInfo();
-		fixture.setEndDate(new Date());
+		fixture.setEndDate(null);
 		fixture.setMaxPrice(new Integer(1));
 		fixture.setStartDate(new Date());
 		fixture.setMinPrice(new Integer(1));
 		fixture.setBedsAvailable(new Integer(1));
 		AvailableBedInfo obj = new AvailableBedInfo();
-		obj.setEndDate(new Date());
+		obj.setEndDate(null);
+		obj.setMaxPrice(null);
+		obj.setStartDate(null);
+		obj.setMinPrice(null);
 		obj.setBedsAvailable(new Integer(1));
+
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
-		assertEquals(false, result);
+		assertEquals(false, result);		
+		
+		obj.setEndDate(new Date());
+		
+		assertEquals(false, fixture.equals(obj));
 	}
 
 	@Test
@@ -110,19 +133,23 @@ public class AvailableBedInfoTest {
 		throws Exception {
 		AvailableBedInfo fixture = new AvailableBedInfo();
 		fixture.setEndDate(new Date());
-		fixture.setMaxPrice(new Integer(1));
+		fixture.setMaxPrice(null);
 		fixture.setStartDate(new Date());
 		fixture.setMinPrice(new Integer(1));
 		fixture.setBedsAvailable(new Integer(1));
 		AvailableBedInfo obj = new AvailableBedInfo();
 		obj.setEndDate(new Date());
-		obj.setMaxPrice(new Integer(1));
+		obj.setMaxPrice(null);
+		obj.setStartDate(null);
+		obj.setMinPrice(null);
 		obj.setBedsAvailable(new Integer(1));
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
+		
+		obj.setMaxPrice(new Integer(1));
+		assertEquals(false, fixture.equals(obj));
 	}
 
 	@Test
@@ -132,42 +159,58 @@ public class AvailableBedInfoTest {
 		fixture.setEndDate(new Date());
 		fixture.setMaxPrice(new Integer(1));
 		fixture.setStartDate(new Date());
-		fixture.setMinPrice(new Integer(1));
+		fixture.setMinPrice(null);
 		fixture.setBedsAvailable(new Integer(1));
 		AvailableBedInfo obj = new AvailableBedInfo();
 		obj.setEndDate(new Date());
 		obj.setMaxPrice(new Integer(1));
-		obj.setMinPrice(new Integer(1));
+		obj.setStartDate(null);
+		obj.setMinPrice(null);
 		obj.setBedsAvailable(new Integer(1));
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
+		
+		obj.setMinPrice(new Integer(1));
+		assertEquals(false, fixture.equals(obj));
+
+
 	}
 
 	@Test
 	public void testEquals_8()
 		throws Exception {
+		Date date = new Date();
 		AvailableBedInfo fixture = new AvailableBedInfo();
-		fixture.setEndDate(new Date());
+		fixture.setEndDate(date);
 		fixture.setMaxPrice(new Integer(1));
-		fixture.setStartDate(new Date());
+		fixture.setStartDate(null);
 		fixture.setMinPrice(new Integer(1));
 		fixture.setBedsAvailable(new Integer(1));
 		AvailableBedInfo obj = new AvailableBedInfo();
-		obj.setEndDate(new Date());
+		obj.setEndDate(date);
 		obj.setMaxPrice(new Integer(1));
-		obj.setStartDate(new Date());
+		obj.setStartDate(null);
 		obj.setMinPrice(new Integer(1));
 		obj.setBedsAvailable(new Integer(1));
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(true, result);
+		
+		obj.setStartDate(new Date());
+		assertEquals(false, fixture.equals(obj));
 	}
 
+	@Test
+	public void testHash_1() 
+		throws Exception{
+		AvailableBedInfo fixture = new AvailableBedInfo();
+		AvailableBedInfo obj = new AvailableBedInfo();
+		
+		assertEquals(fixture.hashCode(),obj.hashCode());
+	}
 	@Test
 	public void testGetBedsAvailable_1()
 		throws Exception {
@@ -180,7 +223,6 @@ public class AvailableBedInfoTest {
 
 		Integer result = fixture.getBedsAvailable();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -204,7 +246,6 @@ public class AvailableBedInfoTest {
 
 		Date result = fixture.getEndDate();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals(DateFormat.getInstance().format(date), DateFormat.getInstance().format(result));
 	}
@@ -221,7 +262,6 @@ public class AvailableBedInfoTest {
 
 		Integer result = fixture.getMaxPrice();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -244,7 +284,6 @@ public class AvailableBedInfoTest {
 
 		Integer result = fixture.getMinPrice();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -268,7 +307,6 @@ public class AvailableBedInfoTest {
 
 		Date result = fixture.getStartDate();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals(DateFormat.getInstance().format(date), DateFormat.getInstance().format(result));
 	}
@@ -286,7 +324,6 @@ public class AvailableBedInfoTest {
 
 		fixture.setBedsAvailable(bedsAvailable);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -302,7 +339,6 @@ public class AvailableBedInfoTest {
 
 		fixture.setEndDate(endDate);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -318,7 +354,6 @@ public class AvailableBedInfoTest {
 
 		fixture.setMaxPrice(maxPrice);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -334,7 +369,6 @@ public class AvailableBedInfoTest {
 
 		fixture.setMinPrice(minPrice);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -350,22 +384,22 @@ public class AvailableBedInfoTest {
 
 		fixture.setStartDate(startDate);
 
-		// add additional test code here
 	}
 
 	@Test
 	public void testToString_1()
 		throws Exception {
 		AvailableBedInfo fixture = new AvailableBedInfo();
-		fixture.setEndDate(new Date());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = sdf.parse("2013/11/22");
+		fixture.setEndDate(date);
 		fixture.setMaxPrice(new Integer(1));
-		fixture.setStartDate(new Date());
+		fixture.setStartDate(date);
 		fixture.setMinPrice(new Integer(1));
 		fixture.setBedsAvailable(new Integer(1));
 
 		String result = fixture.toString();
 
-		// add additional test code here
 		assertEquals("AvailableBedInfo [startDate=2013/11/22, endDate=2013/11/22, bedsAvailable=1, maxPrice=1, minPrice=1]", result);
 	}
 

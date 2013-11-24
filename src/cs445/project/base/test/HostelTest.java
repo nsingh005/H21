@@ -21,7 +21,6 @@ public class HostelTest {
 
 		Hostel result = new Hostel();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Hostel [name=null, hostelId=null, address=null, contact=null, policy=null]", result.toString());
 		assertEquals(null, result.getAddress());
@@ -43,7 +42,6 @@ public class HostelTest {
 
 		Hostel result = new Hostel(name, address, contact, policy, beds);
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Hostel [name=, hostelId=null, address=Address [street=null, city=null, state=null, postalCode=null, country=null], contact=Contact [phoneNumber=null, emailId=null, facebookId=null, webURL=null], policy=Policy [policyId=null, checkInTime=null, checkOutTime=null, isSmoking=false, isAlcohol=false, cancellationDeadline=null, cancellationPenalty=null]]", result.toString());
 		assertEquals("", result.getName());
@@ -62,7 +60,6 @@ public class HostelTest {
 
 		Hostel result = new Hostel(hostelId, name, address, contact, policy, beds);
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Hostel [name=, hostelId=1, address=Address [street=null, city=null, state=null, postalCode=null, country=null], contact=Contact [phoneNumber=null, emailId=null, facebookId=null, webURL=null], policy=Policy [policyId=null, checkInTime=null, checkOutTime=null, isSmoking=false, isAlcohol=false, cancellationDeadline=null, cancellationPenalty=null]]", result.toString());
 		assertEquals("", result.getName());
@@ -77,8 +74,8 @@ public class HostelTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(true, result);
+		assertEquals(true,fixture.equals(fixture));
 	}
 
 	@Test
@@ -89,7 +86,6 @@ public class HostelTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -101,7 +97,6 @@ public class HostelTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -113,14 +108,13 @@ public class HostelTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
 	@Test
 	public void testEquals_5()
 		throws Exception {
-		Address addr = new Address(1, null, null, null, null, null);
+		Address addr = new Address(1, "xyz", null, null, null, null);
 		Contact contact = new Contact();
 		Policy policy = new Policy();
 		List<Bed> beds = new LinkedList<Bed>();
@@ -130,7 +124,6 @@ public class HostelTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -138,16 +131,14 @@ public class HostelTest {
 	public void testEquals_6()
 		throws Exception {
 		Address addr = new Address();
-		Contact contact = new Contact(1, null, null, null, null);
+		Contact contact = new Contact(1, "12345678", null, null, null);
 		Policy policy = new Policy(1, null, null, false, false, null, null);
 		List<Bed> beds = new LinkedList<Bed>();
-		beds.add(new Bed());
 		Hostel fixture = new Hostel(new Integer(1), "", addr,contact,policy, beds);
 		Object obj = new Hostel(new Integer(1), "", new Address(), new Contact(), new Policy(), new LinkedList<Bed>());
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -156,15 +147,13 @@ public class HostelTest {
 		throws Exception {
 		Address addr = new Address();
 		Contact contact = new Contact();
-		Policy policy = new Policy(1, null, null, false, false, null, null);
+		Policy policy = new Policy(1, "14:00", null, false, false, null, null);
 		List<Bed> beds = new LinkedList<Bed>();
-		beds.add(new Bed());
 		Hostel fixture = new Hostel(new Integer(1), "", addr,contact,policy, beds);
 		Object obj = new Hostel(new Integer(1), "", new Address(), new Contact(), new Policy(), new LinkedList<Bed>());
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -181,22 +170,55 @@ public class HostelTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
 	@Test
 	public void testEquals_10()
 		throws Exception {
-		Hostel fixture = new Hostel(new Integer(1), "", new Address(), new Contact(), (Policy) null, new LinkedList<Bed>());
-		Object obj = new Hostel(new Integer(1), null, new Address(), new Contact(), (Policy) null, new LinkedList<Bed>());
-
+		Hostel fixture = new Hostel(new Integer(1), null, new Address(), new Contact(), (Policy) null, new LinkedList<Bed>());
+		Object obj = new Hostel(new Integer(1), "", new Address(), new Contact(), (Policy) null, new LinkedList<Bed>());
+		Object obj1 = new Hostel(new Integer(1), "", null, new Contact(), (Policy) null, new LinkedList<Bed>());
+		
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
+		assertEquals(false, result);
+		assertEquals(false,obj1.equals(obj));
+	}
+	
+	@Test
+	public void testEquals_11()
+		throws Exception {
+		Hostel fixture = new Hostel(new Integer(1), "", new Address(), new Contact(), new Policy(), null);
+		Object obj = new Hostel(new Integer(1), "", new Address(), new Contact(), new Policy(), new LinkedList<Bed>());
+		
+		boolean result = fixture.equals(obj);
+
+		assertEquals(false, result);
+	}
+	
+	@Test
+	public void testEquals_12()
+		throws Exception {
+		Hostel fixture = new Hostel(new Integer(1), "", new Address(), null, new Policy(), new LinkedList<Bed>());
+		Object obj = new Hostel(new Integer(1), "", new Address(), new Contact(), new Policy(), new LinkedList<Bed>());
+		
+		boolean result = fixture.equals(obj);
+
 		assertEquals(false, result);
 	}
 
+	@Test
+	public void testEquals_13()
+		throws Exception {
+		Hostel fixture = new Hostel(new Integer(1), "", new Address(), new Contact(), null, new LinkedList<Bed>());
+		Object obj = new Hostel(new Integer(1), "", new Address(), new Contact(), new Policy(), new LinkedList<Bed>());
+		
+		boolean result = fixture.equals(obj);
+
+		assertEquals(false, result);
+	}
+	
 	@Test
 	public void testGetAddress_1()
 		throws Exception {
@@ -204,7 +226,6 @@ public class HostelTest {
 
 		Address result = fixture.getAddress();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Address [street=null, city=null, state=null, postalCode=null, country=null]", result.toString());
 		assertEquals(null, result.getState());
@@ -222,7 +243,6 @@ public class HostelTest {
 
 		List<Bed> result = fixture.getBeds();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals(0, result.size());
 	}
@@ -234,7 +254,6 @@ public class HostelTest {
 
 		Contact result = fixture.getContact();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Contact [phoneNumber=null, emailId=null, facebookId=null, webURL=null]", result.toString());
 		assertEquals(null, result.getPhoneNumber());
@@ -251,7 +270,6 @@ public class HostelTest {
 
 		Integer result = fixture.getHostelId();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -269,7 +287,6 @@ public class HostelTest {
 
 		String result = fixture.getName();
 
-		// add additional test code here
 		assertEquals("", result);
 	}
 
@@ -280,7 +297,6 @@ public class HostelTest {
 
 		Policy result = fixture.getPolicy();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Policy [policyId=null, checkInTime=null, checkOutTime=null, isSmoking=false, isAlcohol=false, cancellationDeadline=null, cancellationPenalty=null]", result.toString());
 		assertEquals(null, result.getCheckInTime());
@@ -299,7 +315,6 @@ public class HostelTest {
 
 		int result = fixture.hashCode();
 
-		// add additional test code here
 		assertEquals(-1634797025, result);
 	}
 
@@ -310,7 +325,6 @@ public class HostelTest {
 
 		int result = fixture.hashCode();
 
-		// add additional test code here
 		assertEquals(-167854563, result);
 	}
 
@@ -322,7 +336,6 @@ public class HostelTest {
 
 		fixture.setAddress(address);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -347,7 +360,6 @@ public class HostelTest {
 
 		fixture.setBeds(beds);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -358,7 +370,6 @@ public class HostelTest {
 
 		fixture.setContact(contact);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -369,7 +380,6 @@ public class HostelTest {
 
 		fixture.setHostelId(hostelId);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -380,7 +390,6 @@ public class HostelTest {
 
 		fixture.setHostelIdInBeds(hostelId);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -391,7 +400,6 @@ public class HostelTest {
 
 		fixture.setHostelIdInBeds(hostelId);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -402,7 +410,6 @@ public class HostelTest {
 
 		fixture.setName(name);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -413,7 +420,6 @@ public class HostelTest {
 
 		fixture.setPolicy(policy);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -423,7 +429,6 @@ public class HostelTest {
 
 		String result = fixture.toString();
 
-		// add additional test code here
 		assertEquals("Hostel [name=, hostelId=1, address=Address [street=null, city=null, state=null, postalCode=null, country=null], contact=Contact [phoneNumber=null, emailId=null, facebookId=null, webURL=null], policy=Policy [policyId=null, checkInTime=null, checkOutTime=null, isSmoking=false, isAlcohol=false, cancellationDeadline=null, cancellationPenalty=null]]", result);
 	}
 

@@ -3,6 +3,7 @@ package cs445.project.base.test;
 import static org.junit.Assert.*;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +23,6 @@ public class BookingTest {
 
 		Booking result = new Booking();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals(null, result.getState());
 		assertEquals(null, result.getTotalPrice());
@@ -43,16 +43,16 @@ public class BookingTest {
 		Integer hostelId = new Integer(1);
 		String hostelName = "";
 		List<Bed> beds = new LinkedList<Bed>();
-		Date startDate = new Date();
-		Date endDate = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date startDate = sdf.parse("2013/11/22");
+		Date endDate = sdf.parse("2013/11/23");
 		Integer totalPrice = new Integer(1);
 		BookingState state = BookingState.BOOKED;
 
 		Booking result = new Booking(bookingId, userId, hostelId, hostelName, beds, startDate, endDate, totalPrice, state);
 
-		// add additional test code here
 		assertNotNull(result);
-		assertEquals("Booking [bookingId=1, userId=1, hostelId=1, hostelName=, beds=[], startDate=2013/11/22, endDate=2013/11/22, totalPrice=1, state=BOOKED]", result.toString());
+		assertEquals("Booking [bookingId=1, userId=1, hostelId=1, hostelName=, beds=[], startDate=2013/11/22, endDate=2013/11/23, totalPrice=1, state=BOOKED]", result.toString());
 		assertEquals(new Integer(1), result.getTotalPrice());
 		assertEquals("", result.getHostelName());
 		assertEquals(new Integer(1), result.getHostelId());
@@ -67,7 +67,6 @@ public class BookingTest {
 
 		List<Bed> result = fixture.getBeds();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals(0, result.size());
 	}
@@ -80,7 +79,6 @@ public class BookingTest {
 
 		Integer result = fixture.getBookingId();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -100,7 +98,7 @@ public class BookingTest {
 
 		Date result = fixture.getEndDate();
 
-		// add additional test code here
+
 		assertNotNull(result);
 		assertEquals(DateFormat.getInstance().format(date), DateFormat.getInstance().format(result));
 	}
@@ -112,7 +110,7 @@ public class BookingTest {
 
 		Integer result = fixture.getHostelId();
 
-		// add additional test code here
+
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -130,7 +128,7 @@ public class BookingTest {
 
 		String result = fixture.getHostelName();
 
-		// add additional test code here
+
 		assertEquals("", result);
 	}
 
@@ -142,7 +140,6 @@ public class BookingTest {
 
 		Date result = fixture.getStartDate();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals(DateFormat.getInstance().format(date), DateFormat.getInstance().format(result));
 	}
@@ -154,7 +151,6 @@ public class BookingTest {
 
 		BookingState result = fixture.getState();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("BOOKED", result.name());
 		assertEquals("BOOKED", result.toString());
@@ -168,7 +164,6 @@ public class BookingTest {
 
 		Integer result = fixture.getTotalPrice();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -186,7 +181,6 @@ public class BookingTest {
 
 		Integer result = fixture.getUserId();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -205,7 +199,6 @@ public class BookingTest {
 
 		fixture.setBeds(beds);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -227,7 +220,6 @@ public class BookingTest {
 
 		fixture.setEndDate(endDate);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -238,7 +230,6 @@ public class BookingTest {
 
 		fixture.setHostelId(hostelId);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -249,7 +240,6 @@ public class BookingTest {
 
 		fixture.setHostelName(hostelName);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -260,7 +250,6 @@ public class BookingTest {
 
 		fixture.setStartDate(startDate);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -271,7 +260,6 @@ public class BookingTest {
 
 		fixture.setState(state);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -282,7 +270,6 @@ public class BookingTest {
 
 		fixture.setTotalPrice(totalPrice);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -293,40 +280,31 @@ public class BookingTest {
 
 		fixture.setUserId(userId);
 
-		// add additional test code here
 	}
 
 	@Test
 	public void testToString_1()
 		throws Exception {
-		Booking fixture = new Booking(new Integer(1), new Integer(1), new Integer(1), "", new LinkedList<Bed>(), new Date(), new Date(), new Integer(1), BookingState.BOOKED);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = sdf.parse("2013/11/22");
+		Booking fixture = new Booking(new Integer(1), new Integer(1), new Integer(1), "", new LinkedList<Bed>(), date,date, new Integer(1), BookingState.BOOKED);
 
 		String result = fixture.toString();
 
-		// add additional test code here
+
 		assertEquals("Booking [bookingId=1, userId=1, hostelId=1, hostelName=, beds=[], startDate=2013/11/22, endDate=2013/11/22, totalPrice=1, state=BOOKED]", result);
 	}
 
 	@Test
 	public void testUpdateBedStatus_1()
 		throws Exception {
-		Booking fixture = new Booking(new Integer(1), new Integer(1), new Integer(1), "", new LinkedList<Bed>(), new Date(), new Date(), new Integer(1), BookingState.BOOKED);
-		BedState state = BedState.AVAILABLE;
+		List<Bed> beds = new LinkedList<Bed>();
+		Bed b1 = new Bed();
+		beds.add(b1);
+		Booking fixture = new Booking(new Integer(1), new Integer(1), new Integer(1), "", beds, new Date(), new Date(), new Integer(1), BookingState.BOOKED);
+		BedState state = BedState.BOOKED;
 
 		fixture.updateBedStatus(state);
-
-		// add additional test code here
-	}
-
-	@Test
-	public void testUpdateBedStatus_2()
-		throws Exception {
-		Booking fixture = new Booking(new Integer(1), new Integer(1), new Integer(1), "", new LinkedList<Bed>(), new Date(), new Date(), new Integer(1), BookingState.BOOKED);
-		BedState state = BedState.AVAILABLE;
-
-		fixture.updateBedStatus(state);
-
-		// add additional test code here
 	}
 
 }

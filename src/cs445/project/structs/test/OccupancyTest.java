@@ -113,6 +113,7 @@ public class OccupancyTest {
 
 		// add additional test code here
 		assertEquals(true, result);
+		assertEquals(true, fixture.equals(fixture));
 	}
 
 	@Test
@@ -180,11 +181,12 @@ public class OccupancyTest {
 		throws Exception {
 		Occupancy fixture = new Occupancy((Hostel) null, (Integer) null, (Integer) null, 1.0);
 		Object obj = new Occupancy(new Hostel(), (Integer) null, (Integer) null, 1.0);
-
+		Object obj1 = new Occupancy(new Hostel(), (Integer) null, new Integer(1),  1.0);
 		boolean result = fixture.equals(obj);
 
 		// add additional test code here
 		assertEquals(false, result);
+		assertEquals(false, fixture.equals(obj1));
 	}
 
 	@Test
@@ -199,6 +201,30 @@ public class OccupancyTest {
 		assertEquals(false, result);
 	}
 
+	@Test
+	public void testEquals_9()
+		throws Exception {
+		Occupancy fixture = new Occupancy(null, new Integer(1), new Integer(1), 1.0);
+		Object obj = new Occupancy(null, new Integer(1), new Integer(1), 1.0);
+
+		boolean result = fixture.equals(obj);
+
+		// add additional test code here
+		assertEquals(true, result);
+	}
+	
+	@Test
+	public void testEquals_10()
+		throws Exception {
+		Occupancy fixture = new Occupancy(new Hostel(), new Integer(1), new Integer(1), 1.0);
+		Object obj = new Occupancy(new Hostel(1, "xyz", null, null, null, null), new Integer(1), new Integer(1), 1.0);
+
+		boolean result = fixture.equals(obj);
+
+		// add additional test code here
+		assertEquals(false, result);
+	}
+	
 	@Test
 	public void testGetBedsAvailable_1()
 		throws Exception {

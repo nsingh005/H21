@@ -14,7 +14,6 @@ public class PolicyTest {
 
 		Policy result = new Policy();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Policy [policyId=null, checkInTime=null, checkOutTime=null, isSmoking=false, isAlcohol=false, cancellationDeadline=null, cancellationPenalty=null]", result.toString());
 		assertEquals(null, result.getCheckOutTime());
@@ -39,7 +38,6 @@ public class PolicyTest {
 
 		Policy result = new Policy(policyId, checkInTime, checkOutTime, isSmoking, isAlcohol, cancellationDeadline, cancellationPenalty);
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Policy [policyId=1, checkInTime=, checkOutTime=, isSmoking=true, isAlcohol=true, cancellationDeadline=1, cancellationPenalty=1]", result.toString());
 		assertEquals("", result.getCheckOutTime());
@@ -59,8 +57,8 @@ public class PolicyTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(true, result);
+		assertEquals(true, fixture.equals(fixture));
 	}
 
 	@Test
@@ -71,7 +69,6 @@ public class PolicyTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -83,7 +80,6 @@ public class PolicyTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -91,24 +87,26 @@ public class PolicyTest {
 	public void testEquals_4()
 		throws Exception {
 		Policy fixture = new Policy(new Integer(1), null, "", true, true, new Integer(1), new Integer(1));
-		Object obj = new Policy(new Integer(1), "", "", true, true, new Integer(1), new Integer(1));
-
+		Object obj = new Policy(new Integer(1), "12:00", "", true, true, new Integer(1), new Integer(1));
+		Object obj1 = new Policy(new Integer(1), "14:00", "", true, true, new Integer(1), new Integer(1));
+		
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
+		assertEquals(false,obj.equals(obj1));
 	}
 
 	@Test
 	public void testEquals_5()
 		throws Exception {
 		Policy fixture = new Policy(new Integer(1), "", null, true, true, new Integer(1), new Integer(1));
-		Object obj = new Policy(new Integer(1), "", "", true, true, new Integer(1), new Integer(1));
-
+		Object obj = new Policy(new Integer(1), "", "12:00", true, true, new Integer(1), new Integer(1));
+		Object obj1 = new Policy(new Integer(1), "", "14:00", true, true, new Integer(1), new Integer(1));
+		
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
+		assertEquals(false, obj.equals(obj1));
 	}
 
 	@Test
@@ -119,7 +117,6 @@ public class PolicyTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -131,7 +128,6 @@ public class PolicyTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -140,11 +136,12 @@ public class PolicyTest {
 		throws Exception {
 		Policy fixture = new Policy(new Integer(1), "", "", true, true, null, new Integer(1));
 		Object obj = new Policy(new Integer(1), "", "", true, true, new Integer(1), new Integer(1));
-
+		Object obj1 = new Policy(new Integer(1), "", "", true, true, new Integer(2), new Integer(1));
+		
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
+		assertEquals(false, obj.equals(obj1));
 	}
 
 	@Test
@@ -152,11 +149,12 @@ public class PolicyTest {
 		throws Exception {
 		Policy fixture = new Policy(new Integer(1), "", "", true, true, new Integer(1), null);
 		Object obj = new Policy(new Integer(1), "", "", true, true, new Integer(1), new Integer(1));
-
+		Object obj1 = new Policy(new Integer(1), "", "", true, true, new Integer(1), new Integer(2));
+		
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
+		assertEquals(false, obj.equals(obj1));
 	}
 
 	@Test
@@ -166,7 +164,6 @@ public class PolicyTest {
 
 		Integer result = fixture.getCancellationDeadline();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -184,7 +181,6 @@ public class PolicyTest {
 
 		Integer result = fixture.getCancellationPenalty();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -202,7 +198,6 @@ public class PolicyTest {
 
 		String result = fixture.getCheckInTime();
 
-		// add additional test code here
 		assertEquals("", result);
 	}
 
@@ -213,7 +208,6 @@ public class PolicyTest {
 
 		String result = fixture.getCheckOutTime();
 
-		// add additional test code here
 		assertEquals("", result);
 	}
 
@@ -224,7 +218,6 @@ public class PolicyTest {
 
 		Integer result = fixture.getPolicyId();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -242,7 +235,6 @@ public class PolicyTest {
 
 		int result = fixture.hashCode();
 
-		// add additional test code here
 		assertEquals(1744037440, result);
 	}
 
@@ -253,7 +245,6 @@ public class PolicyTest {
 
 		int result = fixture.hashCode();
 
-		// add additional test code here
 		assertEquals(-1634802977, result);
 	}
 
@@ -264,7 +255,6 @@ public class PolicyTest {
 
 		boolean result = fixture.isAlcohol();
 
-		// add additional test code here
 		assertEquals(true, result);
 	}
 
@@ -275,7 +265,6 @@ public class PolicyTest {
 
 		boolean result = fixture.isAlcohol();
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -286,7 +275,6 @@ public class PolicyTest {
 
 		boolean result = fixture.isSmoking();
 
-		// add additional test code here
 		assertEquals(true, result);
 	}
 
@@ -297,7 +285,6 @@ public class PolicyTest {
 
 		boolean result = fixture.isSmoking();
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -309,7 +296,6 @@ public class PolicyTest {
 
 		fixture.setAlcohol(isAlcohol);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -320,7 +306,6 @@ public class PolicyTest {
 
 		fixture.setCancellationDeadline(cancellationDeadline);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -331,7 +316,6 @@ public class PolicyTest {
 
 		fixture.setCancellationPenalty(cancellationPenalty);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -342,7 +326,6 @@ public class PolicyTest {
 
 		fixture.setCheckInTime(checkInTime);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -353,7 +336,6 @@ public class PolicyTest {
 
 		fixture.setCheckOutTime(checkOutTime);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -364,7 +346,6 @@ public class PolicyTest {
 
 		fixture.setPolicyId(policyId);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -375,7 +356,6 @@ public class PolicyTest {
 
 		fixture.setSmoking(isSmoking);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -385,7 +365,6 @@ public class PolicyTest {
 
 		String result = fixture.toString();
 
-		// add additional test code here
 		assertEquals("Policy [policyId=1, checkInTime=, checkOutTime=, isSmoking=true, isAlcohol=true, cancellationDeadline=1, cancellationPenalty=1]", result);
 	}
 

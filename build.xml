@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="wallet" default="main" basedir=".">
+<project name="h21" default="main" basedir=".">
 
 	<property file="build.properties" />
 
@@ -64,7 +64,7 @@
 	<target name="Hostel21Jar" depends="compile">
         <jar destfile="H21.jar" basedir="${classes.dir}" >
 			<manifest>
-				<attribute name="Main-Class" value="cs445.project.commandLineInterface.H21CLI"/>
+				<attribute name="Main-Class" value="cs445.project.commandLineInterface.H21CLIApp"/>
 				<attribute name="Class-Path" value="cobertura.classpath"/>
 			</manifest>
         </jar>

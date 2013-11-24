@@ -18,21 +18,21 @@ import cs445.project.base.Booking;
 import cs445.project.base.Contact;
 import cs445.project.base.Hostel;
 import cs445.project.base.Policy;
-import cs445.project.facilitator.Admin;
+import cs445.project.facilitator.AdminFacilitator;
 import cs445.project.structs.Occupancy;
 
 public class AdminTest {
-	Admin admin;
+	AdminFacilitator adminFacilitator;
 	
 	@Before
 	public void beforeTest() {
-		admin = new Admin();
+		adminFacilitator = new AdminFacilitator();
 	}
 	
 	@Test
 	public void testLoadValidXML() {
 		File xmlFile = new File("sampleHostel.xml");
-		List<Hostel> readHostels = admin.loadXML(xmlFile);
+		List<Hostel> readHostels = adminFacilitator.loadXML(xmlFile);
 		List<Hostel> expectedHostels = createHostelList(false);
 		assertEquals(readHostels.get(0), expectedHostels.get(0));		
 	}
@@ -40,15 +40,23 @@ public class AdminTest {
 	@Test
 	public void testLoadValidXML1() {
 		File xmlFile = new File("sampleHostel1.xml");
-		List<Hostel> readHostels = admin.loadXML(xmlFile);
+		List<Hostel> readHostels = adminFacilitator.loadXML(xmlFile);
 		List<Hostel> expectedHostels = createHostelList(true);
+		assertEquals(readHostels.get(0), expectedHostels.get(0));		
+	}
+	
+	@Test
+	public void testLoadValidXML2() {
+		File xmlFile = new File("sampleHostel2.xml");
+		List<Hostel> readHostels = adminFacilitator.loadXML(xmlFile);
+		List<Hostel> expectedHostels = createHostelList(false);
 		assertEquals(readHostels.get(0), expectedHostels.get(0));		
 	}
 	
 	@Test
 	public void testLoadInvalidXML() {
 		File xmlFile = new File("invalid.xml");
-		List<Hostel> readHostels = admin.loadXML(xmlFile);
+		List<Hostel> readHostels = adminFacilitator.loadXML(xmlFile);
 		
 		assertEquals(readHostels, null);		
 	}
@@ -56,7 +64,7 @@ public class AdminTest {
 	@Test
 	public void testAllHostelOccupancy() {
 		List<Hostel> hostels = createHostelListWithBookings(BedState.BOOKED);
-		List<Occupancy> actualOccupancy = admin.getOccupancyForAllHostels(hostels);
+		List<Occupancy> actualOccupancy = adminFacilitator.getOccupancyForAllHostels(hostels);
 		
 		assertEquals((double)50,actualOccupancy.get(0).getOccupancyRate(),0);
 		assertEquals((double)100,actualOccupancy.get(1).getOccupancyRate(),0);
@@ -65,7 +73,7 @@ public class AdminTest {
 	@Test
 	public void testSingleHostelOccupancy() {
 		List<Hostel> hostels = createHostelListWithBookings(BedState.BOOKED);
-		Occupancy actualOccupancy = admin.getOccupancyByHostel(hostels.get(0));
+		Occupancy actualOccupancy = adminFacilitator.getOccupancyByHostel(hostels.get(0));
 		
 		assertEquals((double)50,actualOccupancy.getOccupancyRate(),0);		
 	}
@@ -73,7 +81,7 @@ public class AdminTest {
 	@Test
 	public void testCalculateRevenue(){
 		List<Booking> bookings = createBookingList();
-		Integer revenue = admin.calculateRevenue(bookings);
+		Integer revenue = adminFacilitator.calculateRevenue(bookings);
 		
 		assertEquals((Integer)55, revenue);
 	}

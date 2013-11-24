@@ -13,7 +13,6 @@ public class ContactTest {
 
 		Contact result = new Contact();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Contact [phoneNumber=null, emailId=null, facebookId=null, webURL=null]", result.toString());
 		assertEquals(null, result.getFacebookId());
@@ -34,7 +33,6 @@ public class ContactTest {
 
 		Contact result = new Contact(contactId, phoneNumber, emailId, facebookId, webURL);
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Contact [phoneNumber=, emailId=, facebookId=, webURL=]", result.toString());
 		assertEquals("", result.getFacebookId());
@@ -52,8 +50,8 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(true, result);
+		assertEquals(true, fixture.equals(fixture));
 	}
 
 	@Test
@@ -64,7 +62,6 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -76,7 +73,6 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -88,7 +84,6 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -100,7 +95,6 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -112,7 +106,6 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -124,7 +117,6 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -136,7 +128,6 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 
@@ -148,7 +139,6 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -160,7 +150,6 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -172,7 +161,6 @@ public class ContactTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -183,7 +171,6 @@ public class ContactTest {
 
 		Integer result = fixture.getContactId();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -201,7 +188,6 @@ public class ContactTest {
 
 		String result = fixture.getEmailId();
 
-		// add additional test code here
 		assertEquals("", result);
 	}
 
@@ -212,7 +198,6 @@ public class ContactTest {
 
 		String result = fixture.getFacebookId();
 
-		// add additional test code here
 		assertEquals("", result);
 	}
 
@@ -223,7 +208,6 @@ public class ContactTest {
 
 		String result = fixture.getPhoneNumber();
 
-		// add additional test code here
 		assertEquals("", result);
 	}
 
@@ -234,7 +218,6 @@ public class ContactTest {
 
 		String result = fixture.getWebURL();
 
-		// add additional test code here
 		assertEquals("", result);
 	}
 
@@ -245,7 +228,6 @@ public class ContactTest {
 
 		int result = fixture.hashCode();
 
-		// add additional test code here
 		assertEquals(923521, result);
 	}
 
@@ -256,7 +238,6 @@ public class ContactTest {
 
 		int result = fixture.hashCode();
 
-		// add additional test code here
 		assertEquals(923521, result);
 	}
 
@@ -268,7 +249,6 @@ public class ContactTest {
 
 		fixture.setContactId(contactId);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -279,7 +259,6 @@ public class ContactTest {
 
 		fixture.setEmailId(emailId);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -290,7 +269,6 @@ public class ContactTest {
 
 		fixture.setFacebookId(facebookId);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -301,7 +279,6 @@ public class ContactTest {
 
 		fixture.setPhoneNumber(phoneNumber);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -312,7 +289,6 @@ public class ContactTest {
 
 		fixture.setWebURL(webURL);
 
-		// add additional test code here
 	}
 
 	@Test
@@ -322,7 +298,6 @@ public class ContactTest {
 
 		String result = fixture.toString();
 
-		// add additional test code here
 		assertEquals("Contact [phoneNumber=, emailId=, facebookId=, webURL=]", result);
 	}
 

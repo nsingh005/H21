@@ -130,11 +130,6 @@ public class Policy {
 			return false;
 		if (isSmoking != other.isSmoking)
 			return false;
-		if (policyId == null) {
-			if (other.policyId != null)
-				return false;
-		} else if (!policyId.equals(other.policyId))
-			return false;
 		return true;
 	}
 }

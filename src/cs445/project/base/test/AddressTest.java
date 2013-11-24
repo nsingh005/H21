@@ -14,7 +14,6 @@ public class AddressTest {
 
 		Address result = new Address();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("Address [street=null, city=null, state=null, postalCode=null, country=null]", result.toString());
 		assertEquals(null, result.getState());
@@ -36,7 +35,6 @@ public class AddressTest {
 
 			Address result = new Address(addressId, street, city, state, postalCode, country);
 
-			// add additional test code here
 			assertNotNull(result);
 			assertEquals("Address [street=, city=, state=, postalCode=, country=]", result.toString());
 			assertEquals("", result.getState());
@@ -55,8 +53,8 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(true, result);
+		assertEquals(true,fixture.equals(fixture));
 	}
 	
 	@Test
@@ -67,7 +65,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -79,7 +76,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -91,7 +87,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -103,7 +98,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -115,7 +109,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -127,7 +120,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -139,7 +131,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -151,7 +142,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -163,7 +153,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -175,7 +164,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -187,7 +175,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -199,7 +186,6 @@ public class AddressTest {
 
 		boolean result = fixture.equals(obj);
 
-		// add additional test code here
 		assertEquals(false, result);
 	}
 	
@@ -210,7 +196,6 @@ public class AddressTest {
 
 		Integer result = fixture.getAddressId();
 
-		// add additional test code here
 		assertNotNull(result);
 		assertEquals("1", result.toString());
 		assertEquals((byte) 1, result.byteValue());
@@ -228,7 +213,6 @@ public class AddressTest {
 
 		String result = fixture.getCity();
 
-		// add additional test code here
 		assertEquals("xyz", result);
 	}
 	
@@ -239,7 +223,6 @@ public class AddressTest {
 
 		String result = fixture.getCountry();
 
-		// add additional test code here
 		assertEquals("xyz", result);
 	}
 	
@@ -250,7 +233,6 @@ public class AddressTest {
 
 		String result = fixture.getPostalCode();
 
-		// add additional test code here
 		assertEquals("1234", result);
 	}
 	
@@ -261,7 +243,6 @@ public class AddressTest {
 
 		String result = fixture.getState();
 
-		// add additional test code here
 		assertEquals("XYZ", result);
 	}
 	
@@ -272,7 +253,6 @@ public class AddressTest {
 
 		String result = fixture.getStreet();
 
-		// add additional test code here
 		assertEquals("abc", result);
 	}
 	
@@ -283,7 +263,6 @@ public class AddressTest {
 
 		int result = fixture.hashCode();
 
-		// add additional test code here
 		assertEquals(28629151, result);
 	}
 	
@@ -294,7 +273,6 @@ public class AddressTest {
 
 		int result = fixture.hashCode();
 
-		// add additional test code here
 		assertEquals(28629151, result);
 	}
 	
@@ -307,7 +285,6 @@ public class AddressTest {
 		fixture.setAddressId(addressId);
 		
 		assertEquals(addressId, fixture.getAddressId());
-		// add additional test code here
 	}
 	
 	@Test
@@ -318,7 +295,6 @@ public class AddressTest {
 
 		fixture.setCity(city);
 		assertEquals("", fixture.getCity());
-		// add additional test code here
 	}
 	
 	@Test
@@ -329,7 +305,6 @@ public class AddressTest {
 
 		fixture.setCountry(country);
 		assertEquals("", fixture.getCountry());
-		// add additional test code here
 	}
 	
 	@Test
@@ -340,7 +315,6 @@ public class AddressTest {
 
 		fixture.setPostalCode(postalCode);
 		assertEquals("", fixture.getPostalCode());
-		// add additional test code here
 	}
 	
 	@Test
@@ -351,7 +325,6 @@ public class AddressTest {
 
 		fixture.setState(state);
 		assertEquals("", fixture.getState());
-		// add additional test code here
 	}
 	
 	@Test
@@ -362,7 +335,6 @@ public class AddressTest {
 
 		fixture.setStreet(street);
 		assertEquals("", fixture.getStreet());
-		// add additional test code here
 	}
 	
 	@Test
@@ -372,7 +344,6 @@ public class AddressTest {
 
 		String result = fixture.toString();
 
-		// add additional test code here
 		assertEquals("Address [street=, city=, state=, postalCode=, country=]", result);
 	}	
 

@@ -1,7 +1,6 @@
 package cs445.project.base;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -79,9 +78,6 @@ public class Booking {
 	}
 	public void setTotalPrice(Integer totalPrice) {
 		this.totalPrice = totalPrice;
-	}
-	public void copyBeds(List<Bed> beds){
-		this.beds = new ArrayList<Bed>(beds);
 	}
 	public Integer getUserId() {
 		return userId;

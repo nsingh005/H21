@@ -19,9 +19,10 @@ public class SearchResultTest {
 	@Test
 	public void testEquals_1()
 		throws Exception {
+		Date date = new Date();
 		SearchResult fixture = new SearchResult();
-		fixture.setEndDate(new Date());
-		fixture.setStartDate(new Date());
+		fixture.setEndDate(date);
+		fixture.setStartDate(date);
 		fixture.setHostelId(new Integer(1));
 		fixture.setHostelName("");
 		fixture.setTotalPrice(new Integer(1));
@@ -29,8 +30,8 @@ public class SearchResultTest {
 		fixture.setSearchId(new Integer(1));
 		fixture.setBeds(new LinkedList<Bed>());
 		SearchResult obj = new SearchResult();
-		obj.setEndDate(new Date());
-		obj.setStartDate(new Date());
+		obj.setEndDate(date);
+		obj.setStartDate(date);
 		obj.setHostelId(new Integer(1));
 		obj.setHostelName("");
 		obj.setTotalPrice(new Integer(1));
@@ -42,6 +43,9 @@ public class SearchResultTest {
 
 		// add additional test code here
 		assertEquals(true, result);
+		assertEquals(true, fixture.equals(fixture));
+		assertEquals(fixture.hashCode(),obj.hashCode());
+		assertEquals(new SearchResult().hashCode(),new SearchResult().hashCode());
 	}
 
 	@Test
@@ -95,63 +99,26 @@ public class SearchResultTest {
 		fixture.setTotalPrice(new Integer(1));
 		fixture.setHostelAddress(new Address());
 		fixture.setSearchId(new Integer(1));
-		fixture.setBeds(new LinkedList<Bed>());
+		fixture.setBeds(null);
 		SearchResult obj = new SearchResult();
-		obj.setBeds(new LinkedList<Bed>());
+		
 
 		boolean result = fixture.equals(obj);
 
 		// add additional test code here
 		assertEquals(false, result);
+		
+		obj.setBeds(new LinkedList<Bed>());
+		assertEquals(false, fixture.equals(obj));
+		
+		List<Bed> beds = new LinkedList<Bed>();
+		beds.add(new Bed());
+		fixture.setBeds(beds);
+		assertEquals(false, fixture.equals(obj));
 	}
 
 	@Test
 	public void testEquals_5()
-		throws Exception {
-		SearchResult fixture = new SearchResult();
-		fixture.setEndDate(new Date());
-		fixture.setStartDate(new Date());
-		fixture.setHostelId(new Integer(1));
-		fixture.setHostelName("");
-		fixture.setTotalPrice(new Integer(1));
-		fixture.setHostelAddress(new Address());
-		fixture.setSearchId(new Integer(1));
-		fixture.setBeds(new LinkedList<Bed>());
-		SearchResult obj = new SearchResult();
-		obj.setEndDate(new Date());
-		obj.setBeds(new LinkedList<Bed>());
-
-		boolean result = fixture.equals(obj);
-
-		// add additional test code here
-		assertEquals(false, result);
-	}
-
-	@Test
-	public void testEquals_6()
-		throws Exception {
-		SearchResult fixture = new SearchResult();
-		fixture.setEndDate(new Date());
-		fixture.setStartDate(new Date());
-		fixture.setHostelId(new Integer(1));
-		fixture.setHostelName("");
-		fixture.setTotalPrice(new Integer(1));
-		fixture.setHostelAddress(new Address());
-		fixture.setSearchId(new Integer(1));
-		fixture.setBeds(new LinkedList<Bed>());
-		SearchResult obj = new SearchResult();
-		obj.setEndDate(new Date());
-		obj.setStartDate(new Date());
-		obj.setBeds(new LinkedList<Bed>());
-
-		boolean result = fixture.equals(obj);
-
-		// add additional test code here
-		assertEquals(false, result);
-	}
-
-	@Test
-	public void testEquals_7()
 		throws Exception {
 		SearchResult fixture = new SearchResult();
 		fixture.setEndDate(null);
@@ -163,15 +130,69 @@ public class SearchResultTest {
 		fixture.setSearchId(new Integer(1));
 		fixture.setBeds(new LinkedList<Bed>());
 		SearchResult obj = new SearchResult();
-		obj.setEndDate(new Date());
-		obj.setTotalPrice(new Integer(1));
-		obj.setStartDate(new Date());
+		obj.setEndDate(null);
 		obj.setBeds(new LinkedList<Bed>());
 
 		boolean result = fixture.equals(obj);
 
 		// add additional test code here
 		assertEquals(false, result);
+		
+		obj.setEndDate(new Date());
+		assertEquals(false,fixture.equals(obj));
+	}
+
+	@Test
+	public void testEquals_6()
+		throws Exception {
+		SearchResult fixture = new SearchResult();
+		fixture.setEndDate(new Date());
+		fixture.setStartDate(null);
+		fixture.setHostelId(new Integer(1));
+		fixture.setHostelName("");
+		fixture.setTotalPrice(new Integer(1));
+		fixture.setHostelAddress(new Address());
+		fixture.setSearchId(new Integer(1));
+		fixture.setBeds(new LinkedList<Bed>());
+		SearchResult obj = new SearchResult();
+		obj.setEndDate(new Date());
+		obj.setStartDate(null);
+		obj.setBeds(new LinkedList<Bed>());
+
+		boolean result = fixture.equals(obj);
+
+		// add additional test code here
+		assertEquals(false, result);
+		
+		obj.setStartDate(new Date());
+		assertEquals(false,fixture.equals(obj));
+	}
+
+	@Test
+	public void testEquals_7()
+		throws Exception {
+		SearchResult fixture = new SearchResult();
+		fixture.setEndDate(new Date());
+		fixture.setStartDate(new Date());
+		fixture.setHostelId(new Integer(1));
+		fixture.setHostelName("");
+		fixture.setTotalPrice(null);
+		fixture.setHostelAddress(new Address());
+		fixture.setSearchId(new Integer(1));
+		fixture.setBeds(new LinkedList<Bed>());
+		SearchResult obj = new SearchResult();
+		obj.setEndDate(new Date());
+		obj.setTotalPrice(null);
+		obj.setStartDate(new Date());
+		obj.setBeds(new LinkedList<Bed>());
+
+		boolean result = fixture.equals(obj);
+
+		// add additional test code here
+		assertEquals(true, result);
+		
+		obj.setTotalPrice(new Integer(1));
+		assertEquals(false,fixture.equals(obj));
 	}
 
 	@Test
@@ -570,8 +591,10 @@ public class SearchResultTest {
 		fixture.setTotalPrice(new Integer(1));
 		fixture.setHostelAddress(new Address());
 		fixture.setSearchId(new Integer(1));
-		fixture.setBeds(new LinkedList<Bed>());
-		BedState state = BedState.AVAILABLE;
+		List<Bed> beds = new LinkedList<Bed>();
+		beds.add(new Bed());
+		fixture.setBeds(beds);
+		BedState state = BedState.SEARCHED;
 
 		fixture.updateBedStatus(state);
 

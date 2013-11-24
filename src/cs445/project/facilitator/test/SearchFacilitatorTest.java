@@ -31,6 +31,72 @@ public class SearchFacilitatorTest {
 	}
 
 	@Test
+	public void testSearchRequestNull(){
+		assertEquals(null,searchFacilitator.search(null, new ArrayList<Hostel>()));
+		assertEquals(null,searchFacilitator.search(new SearchStruct(), null));
+		assertEquals(null,searchFacilitator.searchGeneric(null, new ArrayList<Hostel>()));
+		assertEquals(null,searchFacilitator.searchGeneric(new SearchStruct(), null));
+	}
+	
+	@Test
+	public void testSearchZeroHostelSize(){
+		List<Hostel> hostel = new ArrayList<Hostel>();
+		SearchStruct searchStruct = new SearchStruct();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		searchStruct.setCity("Anytown");
+		try {
+			searchStruct.setStartDate(sdf.parse("20140701"));
+			searchStruct.setEndDate(sdf.parse("20140702"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals(null,searchFacilitator.search(searchStruct, hostel));
+		assertEquals(null,searchFacilitator.searchGeneric(searchStruct, hostel));
+	}
+	
+	@Test
+	public void testSearchStartDateBeforeCurrentDate(){
+		List<Hostel> hostels = new ArrayList<Hostel>();
+		Hostel hostel = new Hostel();
+		hostels.add(hostel);
+		SearchStruct searchStruct = new SearchStruct();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		searchStruct.setCity("Anytown");
+		try {
+			searchStruct.setStartDate(sdf.parse("20130701"));
+			searchStruct.setEndDate(sdf.parse("20140702"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals(null,searchFacilitator.search(searchStruct, hostels));
+		assertEquals(null,searchFacilitator.searchGeneric(searchStruct, hostels));
+	}
+	
+	@Test
+	public void testSearchStartDateAfterEndDate(){
+		List<Hostel> hostels = new ArrayList<Hostel>();
+		Hostel hostel = new Hostel();
+		hostels.add(hostel);
+		SearchStruct searchStruct = new SearchStruct();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		searchStruct.setCity("Anytown");
+		try {
+			searchStruct.setStartDate(sdf.parse("20140703"));
+			searchStruct.setEndDate(sdf.parse("20140702"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals(null,searchFacilitator.search(searchStruct, hostels));
+		assertEquals(null,searchFacilitator.searchGeneric(searchStruct, hostels));
+	}
+	
+	@Test
 	public void testSearchOneBedForOneDay() {
 		List<Hostel> hostels = getHostelListForOneDay();
 		SearchStruct searchStruct = new SearchStruct();

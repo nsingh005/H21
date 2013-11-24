@@ -46,7 +46,12 @@ public class SearchResult {
 		return beds;
 	}
 	public void setBeds(List<Bed> beds) {
-		this.beds = new ArrayList<Bed>(beds);
+		if(beds != null){
+			this.beds = new ArrayList<Bed>(beds);
+		}
+		else {
+			this.beds = null;
+		}
 	}
 	public Date getStartDate() {
 		return startDate;

@@ -3,6 +3,7 @@ package cs445.project.structs.test;
 import static org.junit.Assert.*;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Test;
@@ -16,16 +17,18 @@ public class RevenueTest {
 	public void testRevenue_1()
 		throws Exception {
 		Hostel hostel = new Hostel();
-		Date startDate = new Date();
-		Date endDate = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date startDate = sdf.parse("2013/11/22");
+		Date endDate = sdf.parse("2013/11/23");
 		Integer revenue = new Integer(1);
 
 		Revenue result = new Revenue(hostel, startDate, endDate, revenue);
-
+		
 		// add additional test code here
 		assertNotNull(result);
-		assertEquals("Revenue [startDate=2013/11/22, endDate=2013/11/22, revenue=1]", result.toString());
+		assertEquals("Revenue [startDate=2013/11/22, endDate=2013/11/23, revenue=1]", result.toString());
 		assertEquals(new Integer(1), result.getRevenue());
+
 	}
 
 	@Test
@@ -137,7 +140,9 @@ public class RevenueTest {
 	@Test
 	public void testToString_1()
 		throws Exception {
-		Revenue fixture = new Revenue(new Hostel(), new Date(), new Date(), new Integer(1));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = sdf.parse("2013/11/22");
+		Revenue fixture = new Revenue(new Hostel(), date,date, new Integer(1));
 
 		String result = fixture.toString();
 

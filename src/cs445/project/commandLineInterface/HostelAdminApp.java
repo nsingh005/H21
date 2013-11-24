@@ -8,7 +8,7 @@ import java.util.List;
 
 import cs445.project.base.Booking;
 import cs445.project.base.Hostel;
-import cs445.project.facilitator.Admin;
+import cs445.project.facilitator.AdminFacilitator;
 import cs445.project.facilitator.DBSaveRestore;
 import cs445.project.structs.Occupancy;
 import cs445.project.structs.Revenue;
@@ -33,9 +33,9 @@ public class HostelAdminApp {
 					xmlFile = args[3];
 					
 				    List<Hostel> hostels = null;
-				    Admin admin = new Admin();
+				    AdminFacilitator adminFacilitator = new AdminFacilitator();
 				    DBSaveRestore dbSaveRestore = new DBSaveRestore();
-				    hostels = admin.loadXML(new File(xmlFile));
+				    hostels = adminFacilitator.loadXML(new File(xmlFile));
 				    if(hostels.size() != 0) {
 				    	dbSaveRestore.loadUpdateHostelList(hostels);
 					    System.out.println("Data loaded successfully!!");
@@ -59,7 +59,7 @@ public class HostelAdminApp {
 			}				
 		}
 		else if (command.compareTo("admin") == 0 && subCommand.compareTo("revenue") ==0) {
-			Admin admin = new Admin();
+			AdminFacilitator adminFacilitator = new AdminFacilitator();
 			DBSaveRestore dbSaveRestore = new DBSaveRestore();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			if(args.length >= 7) {
@@ -81,7 +81,7 @@ public class HostelAdminApp {
 						for(Hostel hostel : hostels){
 							List<Booking> bookings = dbSaveRestore.getHostelBookings(hostel.getHostelId(),startDate,endDate);
 							if(bookings.size() != 0){
-								Revenue revenue = new Revenue(hostel, startDate, endDate, admin.calculateRevenue(bookings));
+								Revenue revenue = new Revenue(hostel, startDate, endDate, adminFacilitator.calculateRevenue(bookings));
 							
 								System.out.println("Hostel: "+ revenue.getHostel());
 								System.out.println(revenue);			
@@ -117,7 +117,7 @@ public class HostelAdminApp {
 							if(hostel != null){
 								List<Booking> bookings = dbSaveRestore.getHostelBookings(hostelId,startDate,endDate);
 								if(bookings.size() !=0){
-									Revenue revenue = new Revenue(hostel, startDate, endDate, admin.calculateRevenue(bookings));
+									Revenue revenue = new Revenue(hostel, startDate, endDate, adminFacilitator.calculateRevenue(bookings));
 									
 									System.out.println("Hostel: "+ revenue.getHostel());
 									System.out.println(revenue);
@@ -162,14 +162,14 @@ public class HostelAdminApp {
 				
 		}
 		else if (command.compareTo("admin") == 0 && subCommand.compareTo("occupancy") ==0) {
-			Admin admin = new Admin();
+			AdminFacilitator adminFacilitator = new AdminFacilitator();
 			DBSaveRestore dbSaveRestore = new DBSaveRestore();
 			if(args.length >= 3) {
 				if(args[2].compareTo("all")==0) {
 					List<Hostel> hostels = dbSaveRestore.getHostelList();
 					if(hostels.size() != 0) {
 						//Get the occupancy for all the hostels
-						List<Occupancy> occupancy = admin.getOccupancyForAllHostels(hostels);
+						List<Occupancy> occupancy = adminFacilitator.getOccupancyForAllHostels(hostels);
 						if(occupancy.size() != 0){
 							for(Occupancy o: occupancy){
 								System.out.println("Hostel: "+ o.getHostel());
@@ -192,7 +192,7 @@ public class HostelAdminApp {
 						Integer hostelId = Integer.parseInt(args[3]);
 						Hostel hostel = dbSaveRestore.getHostelById(hostelId);
 						if(hostel != null) {
-							Occupancy occupancy = admin.getOccupancyByHostel(hostel);
+							Occupancy occupancy = adminFacilitator.getOccupancyByHostel(hostel);
 							if(occupancy != null){
 								System.out.println("Hostel: "+ occupancy.getHostel());
 								System.out.println(occupancy);
