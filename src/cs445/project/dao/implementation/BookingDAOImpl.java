@@ -79,7 +79,7 @@ public class BookingDAOImpl {
 			con = services.createConnection();
 			PreparedStatement stmt;
 			
-			stmt = con.prepareStatement("update  booking set state=?,totalPrice=? where bookingId=?;");
+			stmt = con.prepareStatement("update  bookings set state=?,totalPrice=? where bookingId=?;");
 			stmt.setString(1, booking.getState().name());
 			stmt.setInt(2, booking.getTotalPrice());
 			stmt.setInt(2, booking.getBookingId());

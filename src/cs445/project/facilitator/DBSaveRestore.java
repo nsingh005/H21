@@ -339,6 +339,8 @@ public class DBSaveRestore {
 		
 		try {
 			bookings =  bookingDAO.getAllBookings();
+			if(bookings.size() == 0)
+				return null;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

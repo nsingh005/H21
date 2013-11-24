@@ -8,6 +8,7 @@
 	<path id="cobertura.classpath">
 		<fileset dir="${cobertura.dir}">
 			<include name="**/*.jar" />
+			<include name="**/mysql-connector-java-5.1.26-bin.jar" />
 			<include name="lib/**/*.jar" />
 		</fileset>
 	</path>
@@ -62,13 +63,14 @@
 
 	<!-- Create a Runnable Jar file -->
 	<target name="Hostel21Jar" depends="compile">
-        <jar destfile="H21.jar" basedir="${classes.dir}" >
+		<jar destfile="H21.jar" basedir="${classes.dir}" >
 			<manifest>
 				<attribute name="Main-Class" value="cs445.project.commandLineInterface.H21CLIApp"/>
 				<attribute name="Class-Path" value="cobertura.classpath"/>
 			</manifest>
-        </jar>
-    </target>
+			<zipfileset excludes="META-INF/*.SF" src="lib/mysql-connector-java-5.1.26-bin.jar"/>
+		</jar>
+        </target>
 
 	<target name="junit.test" depends="init,compile">
 		<junit fork="yes" dir="${basedir}" failureProperty="test.failed">
