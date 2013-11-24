@@ -8,7 +8,7 @@ import java.util.List;
 
 import cs445.project.base.Bed;
 import cs445.project.base.Hostel;
-import cs445.project.facilitator.Admin;
+import cs445.project.facilitator.AdminFacilitator;
 import cs445.project.facilitator.DBSaveRestore;
 
 public class HostelApp {
@@ -20,8 +20,8 @@ public class HostelApp {
 		  }
 		  
 		  List<Hostel> hostels= null;
-		  Admin admin = new Admin();
-		  hostels = admin.loadXML(new File(args[0]));
+		  AdminFacilitator adminFacilitator = new AdminFacilitator();
+		  hostels = adminFacilitator.loadXML(new File(args[0]));
 		  
 		  DBSaveRestore dbSaveRestore = new DBSaveRestore();
 		  
