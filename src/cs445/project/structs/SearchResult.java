@@ -118,8 +118,5 @@ public class SearchResult {
 		} else if (!totalPrice.equals(other.totalPrice))
 			return false;
 		return true;
-	}
-
-	
-	
+	}	
 }

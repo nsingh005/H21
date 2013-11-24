@@ -31,7 +31,5 @@ public class SearchStruct {
 	}
 	public void setNumberOfBeds(Integer numberOfBeds) {
 		this.numberOfBeds = numberOfBeds;
-	}
-	
-	
+	}	
 }

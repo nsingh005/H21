@@ -96,7 +96,5 @@ public class AvailableBedInfo {
 		} else if (!startDate.equals(other.startDate))
 			return false;
 		return true;
-	}
-	
-	
+	}	
 }

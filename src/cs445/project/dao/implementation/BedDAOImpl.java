@@ -206,6 +206,5 @@ public class BedDAOImpl {
 				
 		return bed;
 		
-	}
-	
+	}	
 }

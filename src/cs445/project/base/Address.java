@@ -115,7 +115,5 @@ public class Address {
 		} else if (!street.equals(other.street))
 			return false;
 		return true;
-	}
-	
-	
+	}	
 }

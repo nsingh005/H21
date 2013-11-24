@@ -66,7 +66,5 @@ public class User {
 				+ ", lastName=" + lastName + ", email=" + email + ", ccNumber="
 				+ ccNumber + ", ccExpiryDate=" + ccExpiryDate
 				+ ", securityCode=" + securityCode + ", phone=" + phone + "]";
-	}
-	
-	
+	}	
 }
