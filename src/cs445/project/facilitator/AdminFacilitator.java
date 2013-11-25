@@ -1,6 +1,7 @@
 package cs445.project.facilitator;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -94,7 +95,14 @@ public class AdminFacilitator {
 								
 								String dateString = eElement1.getElementsByTagName("date").item(0).getTextContent();
 								SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-								Date date = sdf.parse(dateString);
+								Date date = null;
+								try {
+									date = sdf.parse(dateString);
+								}
+								catch (ParseException e){
+									System.out.println("Invalid Date Format!! Please use yyyyMMdd format");
+									return null;
+								}
 								Integer roomNumber = Integer.parseInt(eElement1.getElementsByTagName("room").item(0).getTextContent());
 								Integer bedNumber = Integer.parseInt(eElement1.getElementsByTagName("bed").item(0).getTextContent());
 								Integer price = Integer.parseInt(eElement1.getElementsByTagName("price").item(0).getTextContent());							

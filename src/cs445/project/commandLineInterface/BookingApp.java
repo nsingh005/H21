@@ -31,7 +31,7 @@ public class BookingApp {
 					Booking booking = bookFacilitator.book(searchId,userId);
 					if(booking != null) {
 						System.out.println("Congratulations!! Requested Bed has been booked Successfully!!");
-						System.out.println(booking);
+						printBooking(booking);
 						System.out.println("User details: " + new DBSaveRestore().getUserById(userId));
 						return;
 					}

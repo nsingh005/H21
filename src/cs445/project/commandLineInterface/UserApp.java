@@ -3,6 +3,7 @@ package cs445.project.commandLineInterface;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import cs445.project.base.User;
 import cs445.project.facilitator.UserFacilitator;
@@ -22,60 +23,78 @@ public class UserApp {
 			String subCommand = args[1];
 			
 			if(command.compareTo("user") == 0 && subCommand.compareTo("add") == 0) {
-				if(args[2].compareTo("--first_name") == 0 && 
-						args[4].compareTo("--last_name") == 0 &&
-						args[6].compareTo("--email") == 0 ) {
-					User user = new User();
-					user.setFirstName(args[3]);
-					user.setLastName(args[5]);
-					user.setEmail(args[7]);
-
-					if(args[8].compareTo("--cc_number") == 0) {
+				if(args.length == 16) {
+					if(args[2].compareTo("--first_name") == 0 && 
+							args[4].compareTo("--last_name") == 0 &&
+							args[6].compareTo("--email") == 0 &&
+							args[8].compareTo("--cc_number") == 0 &&
+							args[10].compareTo("--expiration_date") == 0 &&
+							args[12].compareTo("--security_code") == 0 &&
+							args[14].compareTo("--phone") == 0) {
+						Pattern emailPattern = Pattern.compile("^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$",Pattern.CASE_INSENSITIVE);
+						
+						User user = new User();
+						user.setFirstName(args[3]);
+						user.setLastName(args[5]);
+						user.setEmail(args[7]);
+						
+						if(!emailPattern.matcher(user.getEmail()).matches()){
+							System.out.println("Email Id should of xyz@abc.com");
+							return;
+						}
+						
 						user.setCcNumber(args[9]);
-					}						
-					
-					if(args[10].compareTo("--expiration_date") == 0) {
+												
 						try {
 							SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 							user.setCcExpiryDate(sdf.parse(args[11]));
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							//e.printStackTrace();
+							System.out.println("Invalid Date Format!! Please use yyyyMM format");
+							return;
+						}
+						
+						user.setSecurityCode(Integer.parseInt(args[13]));
+						user.setPhone(args[15]);
+
+											
+						
+						if(userFacilitator.isUserPresent(user) == false) {
+							user.setUserId(userFacilitator.addUser(user));
+							System.out.println("User Added Successfully!!");
+							System.out.println("User Id: "+ user.getUserId());
+							return;
+						}
+						else{
+							System.out.println("User Already exist!!!");
+							User u = userFacilitator.getUserByEmail(user.getEmail());
+							System.out.println(u);						
 						}
 					}
+				}
+				else{
+					System.out.println("Insufficient Arguments!!!");
+					printHelp();
+					return;
+				}
 					
-					if(args[12].compareTo("--security_code") == 0) {
-						user.setSecurityCode(Integer.parseInt(args[13]));
-					}
-					
-					if(args[14].compareTo("--phone") == 0) {
-						user.setPhone(args[15]);
-					}
-										
-					
-					if(userFacilitator.isUserPresent(user) == false) {
-						user.setUserId(userFacilitator.addUser(user));
-						System.out.println("User Added Successfully!!");
-						System.out.println("User Id: "+ user.getUserId());
-						return;
-					}
-					else{
-						System.out.println("User Already exist!!!");
-						User u = userFacilitator.getUserByEmail(user.getEmail());
-						System.out.println(u);						
-					}
-				}				
 			}
 			else if(command.compareTo("user") == 0 && subCommand.compareTo("view") == 0) {
-				if(args.length == 3) {
+				if(args.length >= 3) {
 					if(args[2].compareTo("all")==0) {
 						List<User> users = userFacilitator.getAllUsers();
 						for(User u: users) {
 							System.out.println(u);
 						}
 					}
-					else {
-						Integer userId = Integer.parseInt(args[2]);
+					else if(args[2].compareTo("--user_id")==0){
+						if(args.length !=4){
+							System.out.println("Insufficient Arguments!!!");
+							printHelp();
+							return;
+						}
+						Integer userId = Integer.parseInt(args[3]);
 						User user = userFacilitator.getUserById(userId);
 						if(user != null ) {
 							System.out.println(user);
@@ -153,12 +172,13 @@ public class UserApp {
 		System.out.println("Hostel User Usage:");
 		System.out.println("  user add --first_name <User's First Name> --last_name <User's Last Name> --email <Email Id>"
 				+ "\n  --cc_number <Credit Card Number> --expiration_date <Credit Card Exiry Date>"
-				+ "\n  --security_code <Credit Card Security Code> --phone_number <Phone Number>"
+				+ "\n  --security_code <Credit Card Security Code> --phone <Phone Number>"
 				+ "\n : Adds the user details");
 		System.out.println("  user change --user_id <User Id> --first_name <User's First Name> --last_name <User's Last Name> --email <Email Id>"
 				+ "\n  --cc_number <Credit Card Number> --expiration_date <Credit Card Exiry Date>"
-				+ "\n  --security_code <Credit Card Security Code> --phone_number <Phone Number>"
+				+ "\n  --security_code <Credit Card Security Code> --phone <Phone Number>"
 				+ "\n  :Update user details");
 		System.out.println("  user view --user_id <User Id> : Displays a particular User Information");
+		System.out.println("  user view all : Displays all Users Information");
 	}
 }

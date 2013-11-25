@@ -41,7 +41,9 @@ public class SearchBedsApp {
 						searchStruct.setEndDate(sdf.parse(args[6]));					
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						//e.printStackTrace();
+						System.out.println("Invalid Date Format!! Please use yyyyMMdd format");
+						return;
 					}
 					
 					List<Hostel> hostels = dbSaveRestore.getAvailableBedsInAllHostels(searchStruct.getStartDate(),searchStruct.getEndDate());
@@ -79,7 +81,9 @@ public class SearchBedsApp {
 						searchStruct.setEndDate(sdf.parse(args[6]));					
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						//e.printStackTrace();
+						System.out.println("Invalid Date Format!! Please use yyyyMMdd format");
+						return;
 					}
 					searchStruct.setNumberOfBeds(Integer.parseInt(args[8]));
 					
