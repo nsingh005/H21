@@ -144,7 +144,7 @@ public class SearchBedsApp {
 						}
 				    }
 					
-					System.out.println("Search Id: "+ searchResult.getSearchId() + ", " + searchResult.getTotalPrice() 
+					System.out.println("Search Id: "+ searchResult.getSearchId() + ", Price " + searchResult.getTotalPrice() 
 							+ ", " + printRoomStr);
 				}
 			}
